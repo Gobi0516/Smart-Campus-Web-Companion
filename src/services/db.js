@@ -101,3 +101,37 @@ export const saveAssignment = async (assignment) => {
     };
   });
 };
+
+export const saveLecture = async (lecture) => {
+  const db = await initDB();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(['lectures'], 'readwrite');
+    const store = transaction.objectStore('lectures');
+    const request = store.put(lecture);
+
+    request.onsuccess = () => {
+      resolve();
+    };
+
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
+};
+
+export const deleteLecture = async (id) => {
+  const db = await initDB();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(['lectures'], 'readwrite');
+    const store = transaction.objectStore('lectures');
+    const request = store.delete(id);
+
+    request.onsuccess = () => {
+      resolve();
+    };
+
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
+};
