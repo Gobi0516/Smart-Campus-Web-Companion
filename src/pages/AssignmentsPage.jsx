@@ -203,7 +203,16 @@ export default function AssignmentsPage() {
             <div key={assignment.id} className="assignment-card glass-card touch-target" onClick={() => navigate(`/assignments/${assignment.id}`)}>
               <div className="card-header">
                 <h3>{assignment.title}</h3>
-                <span className={`status-badge status-${assignment.status}`}>{assignment.status.replace('-', ' ')}</span>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                  <span className={`status-badge status-${assignment.status}`}>{assignment.status.replace('-', ' ')}</span>
+                  <button 
+                    className="secondary-btn small-btn" 
+                    onClick={(e) => { e.stopPropagation(); handleEdit(assignment); }}
+                    style={{ padding: '0.25rem 0.5rem', fontSize: '0.8rem' }}
+                  >
+                    Edit
+                  </button>
+                </div>
               </div>
               <div className="card-body">
                 <p><strong>Course:</strong> {assignment.course}</p>
