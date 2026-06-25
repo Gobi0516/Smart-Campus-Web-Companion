@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchTodayLectures } from '../services/api';
 
 const DashboardPage = () => {
@@ -24,9 +25,14 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>Today's Schedule</h1>
-        <p>Welcome back! Here are your lectures for today.</p>
+      <header className="dashboard-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div>
+          <h1>Today's Schedule</h1>
+          <p>Welcome back! Here are your lectures for today.</p>
+        </div>
+        {/* <Link to="/assignments" className="primary-btn" style={{ textDecoration: 'none', fontSize: '0.9rem', padding: '0.5rem 1rem' }}>
+          View all
+        </Link> */}
       </header>
 
       <main className="dashboard-main">

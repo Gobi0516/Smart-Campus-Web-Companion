@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAssignments, saveAssignment } from '../services/db';
 import '../styles/AssignmentsPage.css';
 
 const COURSES = ['CS101', 'MATH201', 'ENG102', 'PHY101', 'ART105'];
 
 export default function AssignmentsPage() {
+  const navigate = useNavigate();
   const [assignments, setAssignments] = useState([]);
   const [filter, setFilter] = useState('All');
   
@@ -198,7 +200,7 @@ export default function AssignmentsPage() {
           </div>
         ) : (
           filteredAssignments.map(assignment => (
-            <div key={assignment.id} className="assignment-card glass-card" onClick={() => handleEdit(assignment)}>
+            <div key={assignment.id} className="assignment-card glass-card touch-target" onClick={() => navigate(`/assignments/${assignment.id}`)}>
               <div className="card-header">
                 <h3>{assignment.title}</h3>
                 <span className={`status-badge status-${assignment.status}`}>{assignment.status.replace('-', ' ')}</span>
