@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import '../styles/ProfilePage.css';
 
 const DEFAULT_PROFILE = {
@@ -22,6 +24,14 @@ export default function ProfilePage() {
   const [courseCode, setCourseCode] = useState('');
   const [courseCredits, setCourseCredits] = useState('');
   const [courseGrade, setCourseGrade] = useState('');
+  
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
   
   useEffect(() => {
     const stored = localStorage.getItem('smart-campus-profile');
@@ -99,8 +109,9 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      <header className="page-header">
+      <header className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>Profile</h1>
+        <button className="secondary-btn small-btn" onClick={handleLogout}>Logout</button>
       </header>
 
       <div className="profile-card glass-card">
